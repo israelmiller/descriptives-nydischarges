@@ -1,4 +1,5 @@
 #import the dependencies
+from codecs import ignore_errors
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -66,17 +67,23 @@ ax.pie(data.values, labels=data.index, autopct='%1.0f%%')
 
 plt.show()
 
+##Table for overall data
+table = TableOne(
+    SPARCS, 
+    columns=['length_of_stay', 'total_costs', 'risk_of_mortality', 'race', 'insurance', 'type_of_admission'], 
+    categorical=['risk_of_mortality', 'race','insurance', 'type_of_admission'], 
+    groupby='age_group'
+)
+
+table.to_excel('SPARCS_table_Overall.xlsx')
 
 ###Descriptive Stats for a specific service area
-print("Please input an available area from the list below:")
-
 SPARCS['service_area'].value_counts()
 
 area = 'Long Island'
 SPARCS_AREA = SPARCS[SPARCS['service_area'] == area]
 SPARCS_AREA.shape
 SPARCS_AREA.dtypes
-
 
 #Below is a box plot of the average length of stay based on race for the given service area.
 fig, ax = plt.subplots()
@@ -112,14 +119,13 @@ ax.pie(data.values, labels=('ER', 'Other'), autopct='%1.1f%%')
 
 plt.show()
 
-#A table using the tableone package to show the mean, median, and standard deviation of the most common diagnoses for the given service area.
-
+#A table using the tableone package to show the most common risk factors for mortality in the given service area.
 
 table = TableOne(
-    SPARCS_AREA,
-    columns=['total_charges', 'length_of_stay', ],
-    categorical=['risk_of_mortality', 'gender','emergency_dept', 'race', 'age_group'],
-    groupby='apr_drg_code'
-    )
+    SPARCS_AREA, 
+    columns=['length_of_stay', 'total_costs', 'risk_of_mortality', 'race', 'insurance', 'type_of_admission'], 
+    categorical=['risk_of_mortality', 'race','insurance', 'type_of_admission'], 
+    groupby='age_group'
+)
 
-table.to_excel('table.xlsx')
+table.to_excel('SPARCS_table_LI.xlsx')

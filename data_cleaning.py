@@ -32,6 +32,7 @@ SPARCS.drop({
 SPARCS.rename(columns=({
     'health_service_area' : 'service_area',
     'apr_drg_description' : 'drg_description',
+    'apr_drg_code' : 'drg_code',
     'apr_mdc_description' : 'mdc_description',
     'apr_severity_of_illness_code' : 'severity_of_illness_code', 
     'apr_severity_of_illness_description' : 'severity_of_illness_description',
@@ -80,3 +81,5 @@ for column in SPARCS.columns:
         SPARCS[column] = SPARCS[column].astype('category')
 
 SPARCS.to_csv('data/cleaned_SPARCS_2016.csv')
+
+exit()
