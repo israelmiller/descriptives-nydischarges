@@ -1,9 +1,6 @@
 #load in dependencies
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import scipy.stats
-import tabulate
 #import the dataframe
 
 SPARCS = pd.read_csv('data/Hospital_Inpatient_Discharges__SPARCS_De-Identified___2016.csv')
